@@ -1,0 +1,24 @@
+# Logo 3D Studio (Binks Design)
+
+> Outil web 100 % local qui transforme un logo SVG en objet 3D (volume, biseau, matière, lumière, fond, animation) et exporte image (PNG/JPEG), vidéo (MP4/WebM/GIF/séquence PNG), objet 3D (GLB/GLTF/OBJ/STL/USDZ), visionneuse HTML, kit ZIP ou projet .logo3d.json. Aucun compte, aucune clé, rien n'est envoyé.
+
+URL : https://logo3d.binksdesign.com/
+
+## API pour agents IA
+- `window.BinksyAPI` : API JavaScript publique, asynchrone, JSON. Méthodes : describe, ready, getState, importer, exporter, listerOptions, listerLooks, appliquerLook, setForme, setMateriau, setLumiere, setFond, setAnimation, setCadre, setParam, annuler, retablir, reset. Erreurs `{ code, message }`.
+- WebMCP : les mêmes outils sont enregistrés sous les noms `logo3d_*` (logo3d_describe, logo3d_etat, logo3d_importer, logo3d_exporter, logo3d_lister_options, logo3d_lister_looks, logo3d_appliquer_look, logo3d_forme, logo3d_materiau, logo3d_lumiere, logo3d_fond, logo3d_animation, logo3d_cadre, logo3d_set_param, logo3d_annuler, logo3d_retablir, logo3d_reset) quand le navigateur prend en charge WebMCP.
+- Claude Code / Codex / Hermes / OpenCode : Playwright MCP (`npx @playwright/mcp@latest`), ouvrir l'URL puis appeler `window.BinksyAPI` via browser_evaluate.
+
+## Exemples
+- `await BinksyAPI.describe()`
+- `await BinksyAPI.importer({ files: [{ name: "logo.svg", type: "image/svg+xml", dataBase64: "..." }] })`
+- `await BinksyAPI.appliquerLook({ id: "forge" })`
+- `await BinksyAPI.exporter({ format: "png", size: 2160, transparent: true })` → `{ files: [{ name, type, size, dataBase64 }] }`
+
+## Docs
+- [MCP / Agents IA](https://logo3d.binksdesign.com/mcp/) : outils, connexion WebMCP et Playwright MCP, prompt prêt à copier.
+- [AGENTS.md](https://github.com/binksdesign/binksy-logo3d-studio/blob/master/AGENTS.md)
+
+## Limites
+- Le logo 3D vient d'un SVG (formes vectorielles) ; une image PNG/JPEG est posée sur le logo, pas extrudée.
+- Les vidéos et le rendu photoréaliste (engine "pt") peuvent prendre plusieurs minutes.

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<meta name="color-scheme" content="light">
+<title>MCP / Agents IA — Logo 3D Studio · Binks Design</title>
+<meta name="description" content="Piloter Logo 3D Studio avec un agent IA : window.BinksyAPI, outils WebMCP, Playwright MCP. 100 % local, rien n'est envoyé.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23111'/%3E%3Cpath d='M12 4.6 18.4 8.3v7.4L12 19.4 5.6 15.7V8.3Z' fill='none' stroke='%23f2f2f0' stroke-width='1.8' stroke-linejoin='round'/%3E%3Ccircle cx='18.6' cy='5' r='2' fill='%23ff5500'/%3E%3C/svg%3E">
+<style>
+:root{
+  --frame:#111111; --frame-2:#1f1f1f; --frame-text:#f2f2f0; --frame-text-2:#a7a7a2;
+  --table:#f2f2f0; --card:#ffffff; --line:#e0e0dd; --text:#121212; --text-2:#5f5f5b;
+  --accent:#ff5500; --accent-text:#d64700; --accent-wash:rgb(255 85 0 / .08);
+  --font:"Instrument Sans","Inter","Helvetica Neue",Arial,sans-serif; --display:"Clash Display","Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --pill:999px; --r-card:26px; --r-item:18px;
+  --shadow-card:0 1px 2px rgb(18 18 18 / .04), 0 12px 32px -18px rgb(18 18 18 / .18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--table);color:var(--text);font:400 16px/1.6 var(--font);-webkit-font-smoothing:antialiased}
+a{color:var(--accent-text)}
+header{background:var(--frame);color:var(--frame-text);padding:22px clamp(18px,5vw,56px)}
+.top{display:flex;align-items:center;gap:12px;max-width:980px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
+.brand b{display:block;font:600 16px/1.1 var(--display)}
+.brand small{color:var(--frame-text-2);font-size:12px}
+.back{margin-left:auto;color:var(--frame-text);text-decoration:none;font-weight:600;font-size:14px;padding:10px 16px;border-radius:var(--pill);box-shadow:inset 0 0 0 1.5px #3a3a3a}
+.back:hover{background:var(--frame-2)}
+.hero{max-width:980px;margin:34px auto 6px;padding:0 clamp(18px,5vw,56px)}
+.hero h1{font:600 clamp(30px,5vw,46px)/1.05 var(--display);margin:0 0 12px;letter-spacing:-.01em}
+.hero p{color:var(--text-2);max-width:680px;margin:0}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--accent-wash);color:var(--accent-text);font-weight:600;font-size:13px;padding:6px 12px;border-radius:var(--pill);margin-bottom:16px}
+main{max-width:980px;margin:0 auto;padding:22px clamp(18px,5vw,56px) 60px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+section{min-width:0}
+section{background:var(--card);border-radius:var(--r-card);padding:26px clamp(18px,3.5vw,34px);box-shadow:var(--shadow-card)}
+h2{font:600 22px/1.2 var(--display);margin:0 0 12px}
+h2 .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--frame);color:var(--frame-text);font:600 14px/1 var(--font);margin-right:10px;vertical-align:2px}
+h3{font:600 16px/1.3 var(--font);margin:20px 0 8px}
+p{margin:0 0 10px}
+.tools{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tools li{display:grid;grid-template-columns:minmax(190px,auto) 1fr;gap:14px;padding:9px 0;border-top:1px solid var(--line)}
+.tools li:first-child{border-top:0}
+.tools code{font:500 13.5px/1.5 var(--mono);color:var(--text)}
+.tools span{color:var(--text-2);font-size:15px}
+pre{position:relative;margin:10px 0 4px;background:var(--frame);color:#e9e9e4;border-radius:var(--r-item);padding:16px 18px;overflow:auto;font:13px/1.55 var(--mono)}
+code.i{font:13.5px var(--mono);background:var(--table);padding:2px 6px;border-radius:6px}
+.copy{position:absolute;top:10px;right:10px;border:0;cursor:pointer;background:#2a2a2a;color:#f2f2f0;font:600 12px var(--font);padding:6px 11px;border-radius:var(--pill)}
+.copy:hover{background:var(--accent)}
+.note{background:var(--table);border-radius:var(--r-item);padding:14px 16px;color:var(--text-2);font-size:15px}
+.priv{display:flex;gap:14px;align-items:flex-start}
+.priv svg{flex:none;margin-top:3px}
+footer{text-align:center;color:var(--text-2);font-size:13px;padding:0 0 40px}
+@media (max-width:620px){.tools li{grid-template-columns:1fr;gap:2px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <a class="brand" href="../"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" aria-hidden="true"><path d="M12 3.6 19.4 7.8 12 12 4.6 7.8Z" fill="#f2f2f0"/><path d="M12 3.6 19.4 7.8v8.4L12 20.4 4.6 16.2V7.8Z M4.6 7.8 12 12l7.4-4.2M12 12v8.4" stroke="#f2f2f0" stroke-width="2" stroke-linejoin="round"/><circle cx="19.6" cy="3.9" r="2.1" fill="#ff5500"/></svg><span><b>Logo 3D Studio</b><small>Binks Design</small></span></a>
+    <a class="back" href="../">Ouvrir l’app</a>
+  </div>
+</header>
+
+<div class="hero">
+  <span class="chip">MCP / Agents IA</span>
+  <h1>Pilote Logo 3D Studio avec un agent IA</h1>
+  <p>Un agent (Claude Code, Codex, Hermes, OpenCode, ou l’agent intégré au navigateur) peut importer un logo SVG, régler la 3D et exporter image, vidéo ou objet 3D, sans cliquer dans l’interface. Tout se passe dans la page : <b>window.BinksyAPI</b> et, si le navigateur le permet, des outils <b>WebMCP</b>.</p>
+</div>
+
+<main>
+  <section id="outils">
+    <h2><span class="n">1</span>Ce que l’agent peut faire</h2>
+    <p>Chaque outil WebMCP correspond à une méthode de <code class="i">window.BinksyAPI</code> (entre parenthèses).</p>
+    <ul class="tools">
+      <li><code>logo3d_describe</code><span>Décrit l’app et la liste des outils (<code class="i">describe()</code>).</span></li>
+      <li><code>logo3d_etat</code><span>Résumé de l’état : logo, look, forme, matière, lumière, fond, animation, cadre (<code class="i">getState()</code>).</span></li>
+      <li><code>logo3d_importer</code><span>Importe un SVG (le logo 3D), une image PNG/JPEG/WebP posée sur le logo, ou un projet <code class="i">.logo3d.json</code> (<code class="i">importer()</code>).</span></li>
+      <li><code>logo3d_exporter</code><span>Exporte en PNG, JPEG, MP4, WebM, GIF, séquence PNG, GLB, GLTF, OBJ, STL, USDZ, visionneuse HTML, kit ZIP ou projet ; renvoie les fichiers en base64 (<code class="i">exporter()</code>).</span></li>
+      <li><code>logo3d_lister_options</code><span>Catalogues : looks, matériaux, lumières, fonds, animations, profils, biseaux, cadres, vues (<code class="i">listerOptions()</code>).</span></li>
+      <li><code>logo3d_lister_looks</code><span>Liste les looks prêts à l’emploi, par catégorie (<code class="i">listerLooks()</code>).</span></li>
+      <li><code>logo3d_appliquer_look</code><span>Applique un look complet par son id (<code class="i">appliquerLook()</code>).</span></li>
+      <li><code>logo3d_forme</code><span>Épaisseur, profil, intensité, biseau, qualité du maillage (<code class="i">setForme()</code>).</span></li>
+      <li><code>logo3d_materiau</code><span>Matière : preset, couleur, métal, rugosité, verre, vernis, lueur (<code class="i">setMateriau()</code>).</span></li>
+      <li><code>logo3d_lumiere</code><span>Lumière : preset, exposition, rotation, ombre, tonalité (<code class="i">setLumiere()</code>).</span></li>
+      <li><code>logo3d_fond</code><span>Fond : preset, transparent, couleur ou dégradé, sol, reflet (<code class="i">setFond()</code>).</span></li>
+      <li><code>logo3d_animation</code><span>Animation de la boucle, durée, intensité, courbe, lecture (<code class="i">setAnimation()</code>).</span></li>
+      <li><code>logo3d_cadre</code><span>Cadre (libre, 1:1, 16:9, 9:16, 4:5) et vue de caméra (<code class="i">setCadre()</code>).</span></li>
+      <li><code>logo3d_set_param</code><span>Réglage avancé par chemin, ex. <code class="i">post.bloom</code>, <code class="i">mat.cur.iridescence</code> (<code class="i">setParam()</code>).</span></li>
+      <li><code>logo3d_annuler</code><span>Annule la dernière modification, comme le bouton de l’app (<code class="i">annuler()</code>).</span></li>
+      <li><code>logo3d_retablir</code><span>Rétablit la modification annulée (<code class="i">retablir()</code>).</span></li>
+      <li><code>logo3d_reset</code><span>Revient au logo de démo et au look par défaut (annulable) ; demande l’accord de l’utilisateur (<code class="i">reset({confirm:true})</code>).</span></li>
+    </ul>
+  </section>
+
+  <section id="webmcp">
+    <h2><span class="n">2</span>Connexion A : agent dans le navigateur (WebMCP)</h2>
+    <p>Ouvre <a href="../">logo3d.binksdesign.com</a> dans un Chrome récent où WebMCP est disponible. WebMCP est encore expérimental : selon la version, il faut activer le flag d’aperçu WebMCP dans <code class="i">chrome://flags</code> (cherche « WebMCP ») ou passer par une extension compatible (par exemple MCP-B). Les noms de flags changent d’une version à l’autre : vérifie la documentation Chrome for Developers.</p>
+    <p>Au chargement, l’app enregistre ses outils <code class="i">logo3d_*</code> via <code class="i">document.modelContext.registerTool()</code> (ou l’ancienne forme <code class="i">navigator.modelContext</code>). L’agent du navigateur les voit apparaître tout seul. Sans WebMCP, rien ne change : l’app fonctionne normalement.</p>
+  </section>
+
+  <section id="playwright">
+    <h2><span class="n">3</span>Connexion B : Claude Code, Codex, Hermes, OpenCode</h2>
+    <p>Ces agents pilotent un navigateur local grâce à un serveur MCP standard, <b>Playwright MCP</b>. Ajoute-le à la configuration MCP de ton agent :</p>
+<pre><button class="copy" type="button">Copier</button><code>{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}</code></pre>
+    <p>Consigne pour l’agent : ouvrir l’URL de l’app (<code class="i">browser_navigate</code>), puis appeler <code class="i">window.BinksyAPI</code> avec l’outil d’évaluation JavaScript (<code class="i">browser_evaluate</code>). Toutes les méthodes sont asynchrones et renvoient du JSON.</p>
+    <h3>Découvrir les outils</h3>
+<pre><button class="copy" type="button">Copier</button><code>await BinksyAPI.ready();
+const info = await BinksyAPI.describe();      // { app, version, apiVersion: "1", tools: [...] }
+const options = await BinksyAPI.listerOptions(); // ids des looks, matériaux, lumières…</code></pre>
+    <h3>Importer un logo SVG</h3>
+<pre><button class="copy" type="button">Copier</button><code>// SVG fourni par l’utilisateur, en texte ou en base64
+await BinksyAPI.importer({ files: [{ name: "logo-client.svg", type: "image/svg+xml", dataBase64: "PHN2ZyB4bWxucz0i..." }] });
+await BinksyAPI.appliquerLook({ id: "forge" });
+await BinksyAPI.setForme({ epaisseur: 0.4, biseau: "round" });
+await BinksyAPI.setCadre({ ratio: "1:1" });</code></pre>
+    <h3>Exporter</h3>
+<pre><button class="copy" type="button">Copier</button><code>const png = await BinksyAPI.exporter({ format: "png", size: 2160, transparent: true });
+// png.files[0] = { name: "logo-client-3d.png", type: "image/png", size, dataBase64 }
+await BinksyAPI.setAnimation({ type: "rotY", duree: 6 });
+const mp4 = await BinksyAPI.exporter({ format: "mp4", size: 1080, fps: 30 });
+const glb = await BinksyAPI.exporter({ format: "glb", widthMm: 100 });
+// download: true déclenche aussi le téléchargement dans le navigateur</code></pre>
+    <p class="note">Les erreurs sont renvoyées sous la forme <code class="i">{ code, message }</code> en français, par exemple <code class="i">{ code: "LOOK_INCONNU", message: "…" }</code>. Les vidéos et le moteur photoréaliste peuvent prendre plusieurs minutes.</p>
+  </section>
+
+  <section id="prompt">
+    <h2><span class="n">4</span>Prompt prêt à copier</h2>
+<pre><button class="copy" type="button">Copier</button><code>Ouvre https://logo3d.binksdesign.com/ avec le navigateur (Playwright MCP) et utilise uniquement window.BinksyAPI via browser_evaluate.
+1. await BinksyAPI.ready(), puis BinksyAPI.describe() pour lire les outils.
+2. Importe mon logo SVG (fichier que je te fournis) avec BinksyAPI.importer.
+3. Choisis un look adapté avec listerLooks / appliquerLook, puis ajuste setForme, setMateriau, setLumiere, setFond si besoin.
+4. Exporte un PNG 2160 px fond transparent et un MP4 1080 d’une rotation (setAnimation type "rotY") avec BinksyAPI.exporter, et enregistre les fichiers renvoyés en base64.
+N’invente aucun logo, couleur ou nom de client : utilise seulement ce que je fournis.</code></pre>
+  </section>
+
+  <section id="vie-privee">
+    <h2><span class="n">5</span>Rien n’est envoyé</h2>
+    <div class="priv"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5500" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <p>L’API tourne entièrement dans la page : pas de serveur, pas de compte, pas de clé API. Le logo et les exports restent dans ton navigateur (enregistrement automatique local, IndexedDB et stockage de session). L’agent ne fait que ce que tu lui demandes, avec les fichiers que tu lui donnes.</p></div>
+  </section>
+
+  <section id="english" lang="en">
+    <h2>In English</h2>
+    <p>Logo 3D Studio exposes <code class="i">window.BinksyAPI</code> (async, JSON in/out) and, when the browser supports it, WebMCP tools named <code class="i">logo3d_*</code>. In-browser agents see the tools automatically. Coding agents (Claude Code, Codex, Hermes, OpenCode) can use Playwright MCP (<code class="i">npx @playwright/mcp@latest</code>): open the app URL, then call <code class="i">await BinksyAPI.describe()</code>, <code class="i">BinksyAPI.importer({files:[{name:"logo.svg",dataBase64}]})</code> and <code class="i">BinksyAPI.exporter({format:"png"})</code> through <code class="i">browser_evaluate</code>. Everything stays local: no server, no account, no API key.</p>
+  </section>
+</main>
+<footer>Logo 3D Studio · Binks Design · <a href="../llms.txt">llms.txt</a> · <a href="https://github.com/binksdesign/binksy-logo3d-studio/blob/master/AGENTS.md">AGENTS.md</a></footer>
+<script>
+document.querySelectorAll('.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = b.parentNode.querySelector('code').textContent;
+    var done = function () { b.textContent = 'Copié'; setTimeout(function () { b.textContent = 'Copier'; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, done); else done();
+  });
+});
+</script>
+</body>
+</html>
