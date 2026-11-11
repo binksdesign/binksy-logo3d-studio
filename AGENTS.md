@@ -46,3 +46,9 @@ Connexion depuis Claude Code / Codex / Hermes / OpenCode : Playwright MCP (`npx 
 - Ne rien casser : interface, auto-save (tout revient au rechargement), exports.
 - Tester avant de pousser (Chromium headless) : `describe()`, import SVG/PNG réel, export PNG/GLB/GIF réel non vide, rechargement → état identique, `/mcp/` s'affiche, aucune erreur console.
 - `master` se déploie seul : ne pousser que si les tests passent.
+
+## Qualité du maillage et du rendu (11/11/2026)
+- Finesse du maillage `Fh` : Rapide `.03`, Standard `.016`, Fine `.0105` (pas du contour, en unités du logo normalisé à 2). Anneaux de biseau : 8 / 12 / 16 selon la finesse ; éventail des coins saillants tous les ~7° (`/.12`). Ces réglages existent en double : bundle principal **et** code du worker (`a2`).
+- Courbes SVG : au moins 32 segments par courbe (`Math.max(curveSegments,32)`).
+- SVG « sales » (contours qui se touchent, points en T, fermetures imprécises) : quand le maillage sculpté échoue (`Edge intersects already constrained edge`), `__l3dHeal` nettoie les contours (fusion des points proches, suppression des pics) puis, si besoin, les décale d'une fraction de micron avant de réessayer. L'ancienne extrusion simple (coins qui pincent) n'est plus qu'un dernier recours. Journal : `volume : forme réparée`.
+- Rendu : reflets d'environnement générés en 512 (`pmrem.envRes`, 256 avant) ; sur écran non Retina, rendu suréchantillonné ×2 au repos (sauf GPU faible ou mode prudent).
